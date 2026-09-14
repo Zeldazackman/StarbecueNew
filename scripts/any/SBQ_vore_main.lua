@@ -2201,6 +2201,10 @@ function sbq._Occupant:getLocation()
 end
 
 function sbq._Occupant:checkStruggleDirection(dt)
+	if not world.entityExists(self.entityId) then
+		self.struggleVec = {0,0}
+		return
+	end
 	local dx = 0
 	local dy = 0
 	local powerMultiplier = self:stat("powerMultiplier")
