@@ -321,6 +321,12 @@ function update(dt)
 	sbq.update(dt)
 
 	if sbq.loungingIn() or sbq.timerRunning("missingPredCheck") or (not entity.id()) then return end
+	if not occupantData then
+		occupantData = status.statusProperty("sbqOccupantStorage")
+		if occupantData then
+			occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
+		end
+	end
 	if occupantData
 		and (not (occupantData.flags.newOccupant or occupantData.flags.releasing))
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
